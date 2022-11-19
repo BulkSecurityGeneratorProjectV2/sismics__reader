@@ -47,6 +47,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -554,7 +555,7 @@ public class SubscriptionResource extends BaseResource {
         File importFile = null;
         try {
             // Copy the incoming stream content into a temporary file
-            importFile = File.createTempFile("reader_opml_import", null);
+            importFile = Files.createTempFile("reader_opml_import", null).toFile();
             IOUtils.copy(in, new FileOutputStream(importFile));
             
             SubscriptionImportedEvent event = new SubscriptionImportedEvent();

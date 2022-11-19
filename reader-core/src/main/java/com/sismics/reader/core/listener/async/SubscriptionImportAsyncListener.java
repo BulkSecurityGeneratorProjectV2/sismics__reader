@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -110,7 +111,7 @@ public class SubscriptionImportAsyncListener {
                     File outputFile = null;
                     try {
                         if (archiveEntry.getName().endsWith(FILE_SUBSCRIPTIONS_XML)) {
-                            outputFile = File.createTempFile("subscriptions", "xml");
+                            outputFile = Files.createTempFile("subscriptions", "xml").toFile();
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
     
                             // Read the OPML file
@@ -118,7 +119,7 @@ public class SubscriptionImportAsyncListener {
                             opmlReader.read(new FileInputStream(outputFile));
                             outlineCount = getFeedCount(opmlReader.getOutlineList());
                         } else if (archiveEntry.getName().endsWith(FILE_STARRED_JSON)) {
-                            outputFile = File.createTempFile("starred", "json");
+                            outputFile = Files.createTempFile("starred", "json").toFile();
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
 
                             // Read the starred file
@@ -217,7 +218,7 @@ public class SubscriptionImportAsyncListener {
                     File outputFile = null;
                     try {
                         if (archiveEntry.getName().endsWith(FILE_SUBSCRIPTIONS_XML)) {
-                            outputFile = File.createTempFile("subscriptions", "xml");
+                            outputFile = Files.createTempFile("subscriptions", "xml").toFile();
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
     
                             // Read the OPML file
@@ -225,7 +226,7 @@ public class SubscriptionImportAsyncListener {
                             opmlReader.read(new FileInputStream(outputFile));
                             outlineList = opmlReader.getOutlineList();
                         } else if (archiveEntry.getName().endsWith(FILE_STARRED_JSON)) {
-                            outputFile = File.createTempFile("starred", "json");
+                            outputFile = Files.createTempFile("starred", "json").toFile();
                             ByteStreams.copy(archiveInputStream, new FileOutputStream(outputFile));
 
                             // Read the starred file

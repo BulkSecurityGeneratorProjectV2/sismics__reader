@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
@@ -133,7 +134,7 @@ public class FaviconDownloader {
                 public String process(InputStream is) throws Exception {
                     File localFile = null;
                     try {
-                        localFile = File.createTempFile("reader_favicon", ".ico");
+                        localFile = Files.createTempFile("reader_favicon", ".ico").toFile();
                         if (ByteStreams.copy(is, new FileOutputStream(localFile)) > 0) {
                             // Check if it is a graphics file, we cannot rely on HTTP headers for Content-Type
                             String type = MimeTypeUtil.guessMimeType(localFile);
